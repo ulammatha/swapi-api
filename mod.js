@@ -10,12 +10,19 @@
 // console.log("Listening on http://localhost:8000");
 // await listenAndServe(":8000", handler);
 
-import { Application } from 'https://deno.land/x/oak/mod.ts'
+import { Application, Router, Status } from 'https://deno.land/x/oak/mod.ts'
 
 const port = 8080
 
 const app = new Application()
+const router = new Router()
 
+
+// the routes defined here
+router.get('/', context => {
+    const root = `${Deno.cwd()}/css/index.html`
+    context.response.body = root
+})
 
 app.use(async (context, next) => {
     const root = `${Deno.cwd()}/css/index.html`
